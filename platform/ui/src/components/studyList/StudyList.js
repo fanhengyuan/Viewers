@@ -45,13 +45,25 @@ function StudyList(props) {
       displayText: t('PatientName'),
       fieldName: 'PatientName',
       inputType: 'text',
-      size: 330,
+      size: 180,
+    },
+    {
+      displayText: '性别',
+      fieldName: 'PatientSex',
+      inputType: 'text',
+      size: 80,
+    },
+    {
+      displayText: '出生年月',
+      fieldName: 'PatientBirthdate',
+      inputType: 'text',
+      size: 100,
     },
     {
       displayText: t('MRN'),
       fieldName: 'PatientID',
       inputType: 'text',
-      size: 378,
+      size: 288,
     },
     {
       displayText: t('AccessionNumber'),
@@ -64,6 +76,12 @@ function StudyList(props) {
       fieldName: 'StudyDate',
       inputType: 'date-range',
       size: 300,
+    },
+    {
+      displayText: '时间',
+      fieldName: 'StudyTime',
+      inputType: 'text',
+      size: 100,
     },
     {
       displayText: t('Modality'),
@@ -177,14 +195,17 @@ function StudyList(props) {
         )}
         {!isLoading &&
           studies.map((study, index) => (
-            <TableRow
+            < TableRow
               key={`${study.StudyInstanceUID}-${index}`}
               onClick={StudyInstanceUID => handleSelectItem(StudyInstanceUID)}
               AccessionNumber={study.AccessionNumber || ''}
               modalities={study.modalities}
               PatientID={study.PatientID || ''}
               PatientName={study.PatientName || ''}
+              PatientSex={study.PatientSex || ''}
+              PatientBirthdate={study.PatientBirthdate || ''}
               StudyDate={study.StudyDate}
+              StudyTime={study.StudyTime || ''}
               StudyDescription={study.StudyDescription || ''}
               StudyInstanceUID={study.StudyInstanceUID}
               displaySize={displaySize}
@@ -209,6 +230,8 @@ StudyList.propTypes = {
   // ~~ FILTERS
   filterValues: PropTypes.shape({
     PatientName: PropTypes.string.isRequired,
+    PatientSex: PropTypes.string.isRequired,
+    StudyTime: PropTypes.string.isRequired,
     PatientID: PropTypes.string.isRequired,
     AccessionNumber: PropTypes.string.isRequired,
     StudyDate: PropTypes.string.isRequired,
@@ -233,8 +256,11 @@ function TableRow(props) {
     isHighlighted,
     modalities,
     PatientID,
+    PatientSex,
+    PatientBirthdate,
     PatientName,
     StudyDate,
+    StudyTime,
     StudyDescription,
     StudyInstanceUID,
     onClick: handleClick,
@@ -251,9 +277,12 @@ function TableRow(props) {
       <td className={classNames({ 'empty-value': !PatientName })}>
         {PatientName || `(${t('Empty')})`}
       </td>
+      <td>{PatientSex}</td>
+      <td>{PatientBirthdate}</td>
       <td>{PatientID}</td>
       <td>{AccessionNumber}</td>
       <td>{StudyDate}</td>
+      <td>{StudyTime}</td>
       <td className={classNames({ 'empty-value': !modalities })}>
         {modalities || `(${t('Empty')})`}
       </td>
@@ -396,6 +425,9 @@ TableRow.propTypes = {
   modalities: PropTypes.string,
   PatientID: PropTypes.string.isRequired,
   PatientName: PropTypes.string.isRequired,
+  PatientSex: PropTypes.string.isRequired,
+  PatientBirthdate: PropTypes.string.isRequired,
+  StudyTime: PropTypes.string.isRequired,
   StudyDate: PropTypes.string.isRequired,
   StudyDescription: PropTypes.string.isRequired,
   StudyInstanceUID: PropTypes.string.isRequired,

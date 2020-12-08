@@ -29,16 +29,18 @@ function StudyListRoute(props) {
   const [t] = useTranslation('Common');
   // ~~ STATE
   const [sort, setSort] = useState({
-    fieldName: 'PatientName',
-    direction: 'desc',
+    fieldName: 'StudyDate',
+    direction: 'asc',
   });
   const [filterValues, setFilterValues] = useState({
     studyDateTo: null,
     studyDateFrom: null,
     PatientName: '',
+    PatientSex: '',
     PatientID: '',
     AccessionNumber: '',
     StudyDate: '',
+    StudyTime: '',
     modalities: '',
     StudyDescription: '',
     //
@@ -53,7 +55,7 @@ function StudyListRoute(props) {
     error: null,
   });
   const [activeModalId, setActiveModalId] = useState(null);
-  const [rowsPerPage, setRowsPerPage] = useState(25);
+  const [rowsPerPage, setRowsPerPage] = useState(50);
   const [pageNumber, setPageNumber] = useState(0);
   const appContext = useContext(AppContext);
   // ~~ RESPONSIVE
@@ -246,6 +248,14 @@ function StudyListRoute(props) {
       <div className="table-head-background" />
       <div className="study-list-container">
         {/* STUDY LIST OR DROP ZONE? */}
+        <TablePagination
+          currentPage={pageNumber}
+          nextPageFunc={() => setPageNumber(pageNumber + 1)}
+          prevPageFunc={() => setPageNumber(pageNumber - 1)}
+          onRowsPerPageChange={Rows => setRowsPerPage(Rows)}
+          rowsPerPage={rowsPerPage}
+          recordCount={studies.length}
+        />
         <StudyList
           isLoading={searchStatus.isSearchingForStudies}
           hasError={searchStatus.error === true}
@@ -266,14 +276,6 @@ function StudyListRoute(props) {
           displaySize={displaySize}
         />
         {/* PAGINATION FOOTER */}
-        <TablePagination
-          currentPage={pageNumber}
-          nextPageFunc={() => setPageNumber(pageNumber + 1)}
-          prevPageFunc={() => setPageNumber(pageNumber - 1)}
-          onRowsPerPageChange={Rows => setRowsPerPage(Rows)}
-          rowsPerPage={rowsPerPage}
-          recordCount={studies.length}
-        />
       </div>
     </>
   );
@@ -349,6 +351,7 @@ async function getStudyList(
     AccessionNumber: filters.AccessionNumber,
     StudyDescription: filters.StudyDescription,
     ModalitiesInStudy: filters.modalities,
+    StudyTime: '',
     // NEVER CHANGE
     studyDateFrom,
     studyDateTo,
@@ -368,21 +371,22 @@ async function getStudyList(
     const PatientName =
       typeof study.PatientName === 'string' ? study.PatientName : undefined;
 
+    // console.log(study)
     return {
       AccessionNumber: study.AccessionNumber, // "1"
       modalities: study.modalities, // "SEG\\MR"  ​​
       // numberOfStudyRelatedInstances: "3"
       // numberOfStudyRelatedSeries: "3"
-      // PatientBirthdate: undefined
+      PatientBirthdate: study.PatientBirthdate,
       PatientID: study.PatientID, // "NOID"
       PatientName, // "NAME^NONE"
-      // PatientSex: "M"
+      PatientSex: study.patientSex,
       // referringPhysicianName: undefined
       StudyDate: study.StudyDate, // "Jun 28, 2002"
       StudyDescription: study.StudyDescription, // "BRAIN"
       // studyId: "No Study ID"
       StudyInstanceUID: study.StudyInstanceUID, // "1.3.6.1.4.1.5962.99.1.3814087073.479799962.1489872804257.3.0"
-      // StudyTime: "160956.0"
+      StudyTime: study.StudyTime
     };
   });
 
@@ -424,16 +428,19 @@ async function getStudyList(
 function _sortStudies(studies, field, order) {
   // Make sure our StudyDate is in a valid format and create copy of studies array
   const sortedStudies = studies.map(study => {
-    if (!moment(study.StudyDate, 'MMM DD, YYYY', true).isValid()) {
+    if (!moment(study.StudyDate, 'YYYY-MM-DD', true).isValid()) {
       study.StudyDate = moment(study.StudyDate, 'YYYYMMDD').format(
-        'MMM DD, YYYY'
+        'YYYY-MM-DD'
       );
     }
+
+    study.StudyTime = moment(study.StudyTime, 'HHmmss').format('HH:mm:ss');
+
     return study;
   });
 
   // Sort by field
-  sortedStudies.sort(function(a, b) {
+  sortedStudies.sort(function (a, b) {
     let fieldA = a[field];
     let fieldB = b[field];
     if (field === 'StudyDate') {

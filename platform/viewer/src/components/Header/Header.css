@@ -16,6 +16,14 @@
   clear: both;
 }
 
+.header-title {
+  color: #fff;
+  float: left;
+  clear: both;
+  text-decoration: none;
+  margin-top: 0px;
+}
+
 /* Home Page */
 .entry-header.header-big {
   background: rgba(21, 25, 30, 0.7);

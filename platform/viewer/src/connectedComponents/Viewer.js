@@ -83,8 +83,6 @@ class Viewer extends Component {
         disassociate: this.disassociateStudy,
       },
     });
-
-    this._getActiveViewport = this._getActiveViewport.bind(this);
   }
 
   state = {
@@ -216,10 +214,6 @@ class Viewer extends Component {
     }
   }
 
-  _getActiveViewport() {
-    return this.props.viewports[this.props.activeViewportIndex];
-  }
-
   render() {
     let VisiblePanelLeft, VisiblePanelRight;
     const panelExtensions = extensionManager.modules[MODULE_TYPES.PANEL];
@@ -347,8 +341,6 @@ class Viewer extends Component {
                   viewports={this.props.viewports}
                   studies={this.props.studies}
                   activeIndex={this.props.activeViewportIndex}
-                  activeViewport={this.props.viewports[this.props.activeViewportIndex]}
-                  getActiveViewport={this._getActiveViewport}
                 />
               )}
             </SidePanel>

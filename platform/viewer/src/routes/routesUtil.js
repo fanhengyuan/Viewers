@@ -1,32 +1,32 @@
-import { asyncComponent, retryImport } from '@ohif/ui';
-import OHIF from '@ohif/core';
+import asyncComponent from '../components/AsyncComponent.js';
 
+import OHIF from '@ohif/core';
 const { urlUtil: UrlUtil } = OHIF.utils;
 
 // Dynamic Import Routes (CodeSplitting)
 const IHEInvokeImageDisplay = asyncComponent(() =>
-  retryImport(() =>
-    import(/* webpackChunkName: "IHEInvokeImageDisplay" */ './IHEInvokeImageDisplay.js')
+  import(
+    /* webpackChunkName: "IHEInvokeImageDisplay" */ './IHEInvokeImageDisplay.js'
   )
 );
 const ViewerRouting = asyncComponent(() =>
-  retryImport(() => import(/* webpackChunkName: "ViewerRouting" */ './ViewerRouting.js'))
+  import(/* webpackChunkName: "ViewerRouting" */ './ViewerRouting.js')
 );
 
 const StudyListRouting = asyncComponent(() =>
-  retryImport(() => import(
+  import(
     /* webpackChunkName: "StudyListRouting" */ '../studylist/StudyListRouting.js'
-  ))
+  )
 );
 const StandaloneRouting = asyncComponent(() =>
-  retryImport(() => import(
+  import(
     /* webpackChunkName: "ConnectedStandaloneRouting" */ '../connectedComponents/ConnectedStandaloneRouting.js'
-  ))
+  )
 );
 const ViewerLocalFileData = asyncComponent(() =>
-  retryImport(() => import(
+  import(
     /* webpackChunkName: "ViewerLocalFileData" */ '../connectedComponents/ViewerLocalFileData.js'
-  ))
+  )
 );
 
 const reload = () => window.location.reload();

@@ -1,16 +1,17 @@
 window.config = {
   // default: '/'
   routerBasename: '/',
+  whiteLabelling: {},
   extensions: [],
   showStudyList: true,
   filterQueryParam: false,
   servers: {
     dicomWeb: [
       {
-        name: 'DCM4CHEE',
-        wadoUriRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/wado',
-        qidoRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs',
-        wadoRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs',
+        name: 'ORTHANC',
+        wadoUriRoot: 'http://192.168.1.126:81/pacs/wado',
+        qidoRoot: 'http://192.168.1.126:81/pacs/dicom-web',
+        wadoRoot: 'http://192.168.1.126:81/pacs/dicom-web',
         qidoSupportsIncludeField: true,
         imageRendering: 'wadors',
         thumbnailRendering: 'wadors',
@@ -117,12 +118,4 @@ window.config = {
     },
   ],
   cornerstoneExtensionConfig: {},
-  // Following property limits number of simultaneous series metadata requests.
-  // For http/1.x-only servers, set this to 5 or less to improve
-  //  on first meaningful display in viewer
-  // If the server is particularly slow to respond to series metadata
-  //  requests as it extracts the metadata from raw files everytime,
-  //  try setting this to even lower value
-  // Leave it undefined for no limit, sutiable for HTTP/2 enabled servers
-  // maxConcurrentMetadataRequests: 5,
 };
