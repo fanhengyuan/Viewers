@@ -29,12 +29,12 @@ function StudyListRoute(props) {
   const [t] = useTranslation('Common');
   // ~~ STATE
   const [sort, setSort] = useState({
-    fieldName: 'StudyDate',
+    fieldName: 'StudyTime',
     direction: 'asc',
   });
   const [filterValues, setFilterValues] = useState({
-    studyDateTo: null,
-    studyDateFrom: null,
+    studyDateTo: moment(),
+    studyDateFrom:  moment(),
     PatientName: '',
     PatientSex: '',
     PatientID: '',

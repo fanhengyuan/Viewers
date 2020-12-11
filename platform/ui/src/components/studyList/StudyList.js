@@ -125,6 +125,12 @@ function StudyList(props) {
       inputType: 'text',
       size: 100,
     },
+    {
+      displayText: t('StudyDate'),
+      fieldName: 'StudyDate',
+      inputType: 'date-range',
+      size: 50,
+    },
   ];
 
   const tableMeta = getContentFromUseMediaValue(
@@ -189,7 +195,7 @@ function StudyList(props) {
         {!isLoading && !studies.length && (
           <tr className="no-hover">
             <td colSpan={tableMeta.length}>
-              <div className="notFound">{t('No matching results')}</div>
+              <div className="notFound">{'还没有数据，等待设备上传！'}</div>
             </td>
           </tr>
         )}

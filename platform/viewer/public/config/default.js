@@ -5,13 +5,14 @@ window.config = {
   extensions: [],
   showStudyList: true,
   filterQueryParam: false,
+//   studyListFunctionsEnabled: true,
   servers: {
     dicomWeb: [
       {
         name: 'ORTHANC',
-        wadoUriRoot: 'http://192.168.1.126:81/pacs/wado',
-        qidoRoot: 'http://192.168.1.126:81/pacs/dicom-web',
-        wadoRoot: 'http://192.168.1.126:81/pacs/dicom-web',
+        wadoUriRoot: 'http://192.168.3.5:81/pacs/wado',
+        qidoRoot: 'http://192.168.3.5:81/pacs/dicom-web',
+        wadoRoot: 'http://192.168.3.5:81/pacs/dicom-web',
         qidoSupportsIncludeField: true,
         imageRendering: 'wadors',
         thumbnailRendering: 'wadors',

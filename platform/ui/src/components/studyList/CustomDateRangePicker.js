@@ -113,11 +113,11 @@ function CustomDateRangePicker(props) {
       renderCalendarInfo={renderDatePresets}
       onDatesChange={onDatesChange}
       renderMonthElement={renderMonthElement}
-      startDatePlaceholderText={t('Start Date')}
-      endDatePlaceholderText={t('End Date')}
+      startDatePlaceholderText={'开始日期'}
+      endDatePlaceholderText={'结束日期'}
       phrases={{
-        closeDatePicker: t('Common:Close'),
-        clearDates: t('Clear dates'),
+        closeDatePicker: '关闭',
+        clearDates: '清除日期',
       }}
     />
   );
