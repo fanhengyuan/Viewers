@@ -12,7 +12,12 @@ import i18n from '@ohif/i18n';
 import { useTranslation } from 'react-i18next';
 
 function CustomDateRangePicker(props) {
-  moment.locale(i18n.language); // using i18n in the date picker
+  // using i18n in the date picker
+  if (i18n.language == 'zh') {
+    moment.locale('zh-CN');
+  } else {
+    moment.locale(i18n.language);
+  }
 
   const { t } = useTranslation('DatePicker');
 
@@ -36,9 +41,8 @@ function CustomDateRangePicker(props) {
             <button
               key={text}
               type="button"
-              className={`PresetDateRangePicker_button ${
-                isSelected ? 'PresetDateRangePicker_button__selected' : ''
-              }`}
+              className={`PresetDateRangePicker_button ${isSelected ? 'PresetDateRangePicker_button__selected' : ''
+                }`}
               onClick={() =>
                 onDatesChange({
                   startDate: start,
@@ -92,7 +96,7 @@ function CustomDateRangePicker(props) {
           </select>
         </div>
         <div style={containerStyle}>
-          {}
+          { }
           <select
             className="DateRangePicker_select"
             value={month.year()}

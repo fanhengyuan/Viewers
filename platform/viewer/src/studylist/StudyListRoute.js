@@ -34,7 +34,7 @@ function StudyListRoute(props) {
   });
   const [filterValues, setFilterValues] = useState({
     studyDateTo: moment(),
-    studyDateFrom:  moment(),
+    studyDateFrom: moment(),
     PatientName: '',
     PatientSex: '',
     PatientID: '',
