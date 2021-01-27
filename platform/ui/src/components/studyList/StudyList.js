@@ -65,12 +65,12 @@ function StudyList(props) {
       inputType: 'text',
       size: 288,
     },
-    {
-      displayText: t('AccessionNumber'),
-      fieldName: 'AccessionNumber',
-      inputType: 'text',
-      size: 180,
-    },
+    // {
+    //   displayText: t('AccessionNumber'),
+    //   fieldName: 'AccessionNumber',
+    //   inputType: 'text',
+    //   size: 180,
+    // },
     {
       displayText: t('StudyDate'),
       fieldName: 'StudyDate',
@@ -286,7 +286,7 @@ function TableRow(props) {
       <td>{PatientSex}</td>
       <td>{PatientBirthdate}</td>
       <td>{PatientID}</td>
-      <td>{AccessionNumber}</td>
+      {/* <td>{AccessionNumber}</td> */}
       <td>{StudyDate}</td>
       <td>{StudyTime}</td>
       <td className={classNames({ 'empty-value': !modalities })}>
