@@ -51,7 +51,7 @@ function StudyList(props) {
       displayText: '性别',
       fieldName: 'PatientSex',
       inputType: 'text',
-      size: 80,
+      size: 70,
     },
     {
       displayText: '出生年月',
